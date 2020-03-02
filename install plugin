@@ -1,0 +1,15 @@
+1. Create .. redmine/plugins/some/Gemfile
+2. add gem to Gemfile
+3. go redmine dir
+4. bundle
+5. create simlink
+6. delete redmine/plugins/some/Gemfile
+
+
+
+1. create folder somewhere
+2. git clone --bare url
+3. chgrp -R redmine dir-with-repo
+4. chmod -R g+rw dir-with-repo
+5. in progect create repo and specify path to
+6. [???] ssh keys

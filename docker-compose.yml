@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  redmine:
+    image: redmine
+    restart: always
+    ports:
+      - ${REDMINE_PORT}:3000
+    environment:
+      REDMINE_DB_POSTGRES: db
+      REDMINE_DB_USERNAME: "${POSTGRES_USER}"
+      REDMINE_DB_PASSWORD: "${POSTGRES_PASSWORD}"
+    volumes:
+    - redmine-volume:/usr/src/redmine
+    - redmine-plugins-volume:/usr/local/bundle/gems
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    ports:
+    - ${POSTGRES_PORT}:5432
+    volumes:
+    - redmine-db-volume:/var/lib/postgresql/data
+volumes:
+  redmine-db-volume:
+    external: true
+  redmine-volume:
+    external: true
+  redmine-plugins-volume:
+    external: true
