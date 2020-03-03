@@ -10,6 +10,11 @@ RUN ln -s /usr/local/bundle/gems/redmine_github_hook-3.0.1/ /usr/src/redmine/plu
 
 RUN mkdir /usr/src/redmine/repositories
 # clone repo
+# access repositories path: /usr/src/redmine/repositories/libiada-web.git
 RUN cd /usr/src/redmine/repositories && git clone --bare https://github.com/intervals-mining-lab/libiada-web
 RUN cd /usr/src/redmine/repositories && git clone --bare https://github.com/intervals-mining-lab/foarlab.org
 RUN cd /usr/src/redmine/repositories && git clone --bare https://github.com/intervals-mining-lab/libiada-core
+
+# change permissions
+RUN chgrp -R redmine /usr/src/redmine/repositories
+RUN chmod -R g+rw /usr/src/redmine/repositories
